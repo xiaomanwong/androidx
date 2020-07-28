@@ -1,0 +1,59 @@
+// Baseline format: 1.0
+AcronymName: androidx.work.Operation.State.FAILURE:
+    Acronyms should not be capitalized in class names: was `FAILURE`, should this be `Failure`?
+AcronymName: androidx.work.Operation.State.IN_PROGRESS:
+    Acronyms should not be capitalized in class names: was `IN_PROGRESS`, should this be `InProgress`?
+AcronymName: androidx.work.Operation.State.SUCCESS:
+    Acronyms should not be capitalized in class names: was `SUCCESS`, should this be `Success`?
+
+
+BuilderSetStyle: androidx.work.Data.Builder#putAll(androidx.work.Data):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putAll(androidx.work.Data)
+BuilderSetStyle: androidx.work.Data.Builder#putAll(java.util.Map<java.lang.String,java.lang.Object>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putAll(java.util.Map<java.lang.String,java.lang.Object>)
+BuilderSetStyle: androidx.work.Data.Builder#putBoolean(String, boolean):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putBoolean(String,boolean)
+BuilderSetStyle: androidx.work.Data.Builder#putBooleanArray(String, boolean[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putBooleanArray(String,boolean[])
+BuilderSetStyle: androidx.work.Data.Builder#putByte(String, byte):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putByte(String,byte)
+BuilderSetStyle: androidx.work.Data.Builder#putByteArray(String, byte[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putByteArray(String,byte[])
+BuilderSetStyle: androidx.work.Data.Builder#putDouble(String, double):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putDouble(String,double)
+BuilderSetStyle: androidx.work.Data.Builder#putDoubleArray(String, double[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putDoubleArray(String,double[])
+BuilderSetStyle: androidx.work.Data.Builder#putFloat(String, float):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putFloat(String,float)
+BuilderSetStyle: androidx.work.Data.Builder#putFloatArray(String, float[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putFloatArray(String,float[])
+BuilderSetStyle: androidx.work.Data.Builder#putInt(String, int):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putInt(String,int)
+BuilderSetStyle: androidx.work.Data.Builder#putIntArray(String, int[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putIntArray(String,int[])
+BuilderSetStyle: androidx.work.Data.Builder#putLong(String, long):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putLong(String,long)
+BuilderSetStyle: androidx.work.Data.Builder#putLongArray(String, long[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putLongArray(String,long[])
+BuilderSetStyle: androidx.work.Data.Builder#putString(String, String):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putString(String,String)
+BuilderSetStyle: androidx.work.Data.Builder#putStringArray(String, String[]):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.Data.Builder.putStringArray(String,String[])
+BuilderSetStyle: androidx.work.WorkRequest.Builder#keepResultsForAtLeast(java.time.Duration):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.WorkRequest.Builder.keepResultsForAtLeast(java.time.Duration)
+BuilderSetStyle: androidx.work.WorkRequest.Builder#keepResultsForAtLeast(long, java.util.concurrent.TimeUnit):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.WorkRequest.Builder.keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)
+
+
+MissingNullability: androidx.work.Constraints.Builder#setTriggerContentMaxDelay(java.time.Duration) parameter #0:
+    Missing nullability on parameter `duration` in method `setTriggerContentMaxDelay`
+MissingNullability: androidx.work.Constraints.Builder#setTriggerContentUpdateDelay(java.time.Duration) parameter #0:
+    Missing nullability on parameter `duration` in method `setTriggerContentUpdateDelay`
+
+
+NoByteOrShort: androidx.work.Data#getByte(String, byte):
+    Should avoid odd sized primitives; use `int` instead of `byte` in method androidx.work.Data.getByte(String,byte)
+NoByteOrShort: androidx.work.Data#getByte(String, byte) parameter #1:
+    Should avoid odd sized primitives; use `int` instead of `byte` in parameter defaultValue in androidx.work.Data.getByte(String key, byte defaultValue)
+NoByteOrShort: androidx.work.Data.Builder#putByte(String, byte) parameter #1:
+    Should avoid odd sized primitives; use `int` instead of `byte` in parameter value in androidx.work.Data.Builder.putByte(String key, byte value)

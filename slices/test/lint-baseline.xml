@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.1.0-alpha08" client="gradle" variant="debug" version="4.1.0-alpha08">
+
+    <issue
+        id="RestrictedApi"
+        message="MessagingSliceBuilder can only be called from within the same library group prefix (referenced groupId=`androidx.slice` with prefix androidx from groupId=`androidx`)"
+        errorLine1="        MessagingSliceBuilder b = new MessagingSliceBuilder(getContext(), sliceUri);"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="539"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="MessagingSliceBuilder.add can only be called from within the same library group prefix (referenced groupId=`androidx.slice` with prefix androidx from groupId=`androidx`)"
+        errorLine1="        return b.add(new MessagingSliceBuilder.MessageBuilder(b)"
+        errorLine2="                 ~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="540"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="MessagingSliceBuilder.add can only be called from within the same library group prefix (referenced groupId=`androidx.slice` with prefix androidx from groupId=`androidx`)"
+        errorLine1="                .add(new MessagingSliceBuilder.MessageBuilder(b)"
+        errorLine2="                 ~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="544"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="MessagingSliceBuilder.add can only be called from within the same library group prefix (referenced groupId=`androidx.slice` with prefix androidx from groupId=`androidx`)"
+        errorLine1="                .add(new MessagingSliceBuilder.MessageBuilder(b)"
+        errorLine2="                 ~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="547"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public static Uri getUri(String path, Context context) {"
+        errorLine2="                  ~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="125"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public static Uri getUri(String path, Context context) {"
+        errorLine2="                             ~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="125"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public static Uri getUri(String path, Context context) {"
+        errorLine2="                                          ~~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="125"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public Slice onBindSlice(@NonNull Uri sliceUri) {"
+        errorLine2="           ~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="145"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public static ArrayList&lt;String> sGroceryList = new ArrayList&lt;>();"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SampleSliceProvider.java"
+            line="576"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public void onReceive(final Context context, Intent i) {"
+        errorLine2="                                ~~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SliceBroadcastReceiver.java"
+            line="44"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public void onReceive(final Context context, Intent i) {"
+        errorLine2="                                                 ~~~~~~">
+        <location
+            file="src/main/java/androidx/slice/test/SliceBroadcastReceiver.java"
+            line="44"
+            column="50"/>
+    </issue>
+
+</issues>

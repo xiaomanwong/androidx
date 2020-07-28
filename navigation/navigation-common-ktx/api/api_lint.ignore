@@ -1,0 +1,81 @@
+// Baseline format: 1.0
+BuilderSetStyle: androidx.navigation.NavActionBuilder#navOptions(kotlin.jvm.functions.Function1<? super androidx.navigation.NavOptionsBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavActionBuilder.navOptions(kotlin.jvm.functions.Function1<? super androidx.navigation.NavOptionsBuilder,kotlin.Unit>)
+BuilderSetStyle: androidx.navigation.NavDestinationBuilder#action(int, kotlin.jvm.functions.Function1<? super androidx.navigation.NavActionBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavDestinationBuilder.action(int,kotlin.jvm.functions.Function1<? super androidx.navigation.NavActionBuilder,kotlin.Unit>)
+BuilderSetStyle: androidx.navigation.NavDestinationBuilder#argument(String, kotlin.jvm.functions.Function1<? super androidx.navigation.NavArgumentBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavDestinationBuilder.argument(String,kotlin.jvm.functions.Function1<? super androidx.navigation.NavArgumentBuilder,kotlin.Unit>)
+BuilderSetStyle: androidx.navigation.NavDestinationBuilder#deepLink(String):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavDestinationBuilder.deepLink(String)
+BuilderSetStyle: androidx.navigation.NavDestinationBuilder#deepLink(kotlin.jvm.functions.Function1<? super androidx.navigation.NavDeepLinkDslBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavDestinationBuilder.deepLink(kotlin.jvm.functions.Function1<? super androidx.navigation.NavDeepLinkDslBuilder,kotlin.Unit>)
+BuilderSetStyle: androidx.navigation.NavOptionsBuilder#anim(kotlin.jvm.functions.Function1<? super androidx.navigation.AnimBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavOptionsBuilder.anim(kotlin.jvm.functions.Function1<? super androidx.navigation.AnimBuilder,kotlin.Unit>)
+BuilderSetStyle: androidx.navigation.NavOptionsBuilder#popUpTo(int, kotlin.jvm.functions.Function1<? super androidx.navigation.PopUpToBuilder,kotlin.Unit>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.navigation.NavOptionsBuilder.popUpTo(int,kotlin.jvm.functions.Function1<? super androidx.navigation.PopUpToBuilder,kotlin.Unit>)
+
+
+DocumentExceptions: androidx.navigation.NavArgumentBuilder#getType():
+    Method NavArgumentBuilder.getType appears to be throwing java.lang.IllegalStateException; this should be listed in the documentation; see https://android.github.io/kotlin-guides/interop.html#document-exceptions
+DocumentExceptions: androidx.navigation.NavGraphBuilder#build():
+    Method NavGraphBuilder.build appears to be throwing java.lang.IllegalStateException; this should be listed in the documentation; see https://android.github.io/kotlin-guides/interop.html#document-exceptions
+
+
+MissingBuildMethod: androidx.navigation.AnimBuilder:
+    androidx.navigation.AnimBuilder does not declare a `build()` method, but builder classes are expected to
+MissingBuildMethod: androidx.navigation.NavActionBuilder:
+    androidx.navigation.NavActionBuilder does not declare a `build()` method, but builder classes are expected to
+MissingBuildMethod: androidx.navigation.NavDeepLinkDslBuilder:
+    androidx.navigation.NavDeepLinkDslBuilder does not declare a `build()` method, but builder classes are expected to
+MissingBuildMethod: androidx.navigation.NavOptionsBuilder:
+    androidx.navigation.NavOptionsBuilder does not declare a `build()` method, but builder classes are expected to
+MissingBuildMethod: androidx.navigation.PopUpToBuilder:
+    androidx.navigation.PopUpToBuilder does not declare a `build()` method, but builder classes are expected to
+
+
+SetterReturnsThis: androidx.navigation.AnimBuilder#setEnter(int):
+    Methods must return the builder object (return type androidx.navigation.AnimBuilder instead of void): method androidx.navigation.AnimBuilder.setEnter(int)
+SetterReturnsThis: androidx.navigation.AnimBuilder#setExit(int):
+    Methods must return the builder object (return type androidx.navigation.AnimBuilder instead of void): method androidx.navigation.AnimBuilder.setExit(int)
+SetterReturnsThis: androidx.navigation.AnimBuilder#setPopEnter(int):
+    Methods must return the builder object (return type androidx.navigation.AnimBuilder instead of void): method androidx.navigation.AnimBuilder.setPopEnter(int)
+SetterReturnsThis: androidx.navigation.AnimBuilder#setPopExit(int):
+    Methods must return the builder object (return type androidx.navigation.AnimBuilder instead of void): method androidx.navigation.AnimBuilder.setPopExit(int)
+SetterReturnsThis: androidx.navigation.NavActionBuilder#setDestinationId(int):
+    Methods must return the builder object (return type androidx.navigation.NavActionBuilder instead of void): method androidx.navigation.NavActionBuilder.setDestinationId(int)
+SetterReturnsThis: androidx.navigation.NavArgumentBuilder#setDefaultValue(Object):
+    Methods must return the builder object (return type androidx.navigation.NavArgumentBuilder instead of void): method androidx.navigation.NavArgumentBuilder.setDefaultValue(Object)
+SetterReturnsThis: androidx.navigation.NavArgumentBuilder#setNullable(boolean):
+    Methods must return the builder object (return type androidx.navigation.NavArgumentBuilder instead of void): method androidx.navigation.NavArgumentBuilder.setNullable(boolean)
+SetterReturnsThis: androidx.navigation.NavArgumentBuilder#setType(androidx.navigation.NavType<?>):
+    Methods must return the builder object (return type androidx.navigation.NavArgumentBuilder instead of void): method androidx.navigation.NavArgumentBuilder.setType(androidx.navigation.NavType<?>)
+SetterReturnsThis: androidx.navigation.NavDeepLinkDslBuilder#setAction(String):
+    Methods must return the builder object (return type androidx.navigation.NavDeepLinkDslBuilder instead of void): method androidx.navigation.NavDeepLinkDslBuilder.setAction(String)
+SetterReturnsThis: androidx.navigation.NavDeepLinkDslBuilder#setMimeType(String):
+    Methods must return the builder object (return type androidx.navigation.NavDeepLinkDslBuilder instead of void): method androidx.navigation.NavDeepLinkDslBuilder.setMimeType(String)
+SetterReturnsThis: androidx.navigation.NavDeepLinkDslBuilder#setUriPattern(String):
+    Methods must return the builder object (return type androidx.navigation.NavDeepLinkDslBuilder instead of void): method androidx.navigation.NavDeepLinkDslBuilder.setUriPattern(String)
+SetterReturnsThis: androidx.navigation.NavDestinationBuilder#setLabel(CharSequence):
+    Methods must return the builder object (return type androidx.navigation.NavDestinationBuilder<D> instead of void): method androidx.navigation.NavDestinationBuilder.setLabel(CharSequence)
+SetterReturnsThis: androidx.navigation.NavOptionsBuilder#setLaunchSingleTop(boolean):
+    Methods must return the builder object (return type androidx.navigation.NavOptionsBuilder instead of void): method androidx.navigation.NavOptionsBuilder.setLaunchSingleTop(boolean)
+SetterReturnsThis: androidx.navigation.NavOptionsBuilder#setPopUpTo(int):
+    Methods must return the builder object (return type androidx.navigation.NavOptionsBuilder instead of void): method androidx.navigation.NavOptionsBuilder.setPopUpTo(int)
+SetterReturnsThis: androidx.navigation.PopUpToBuilder#setInclusive(boolean):
+    Methods must return the builder object (return type androidx.navigation.PopUpToBuilder instead of void): method androidx.navigation.PopUpToBuilder.setInclusive(boolean)
+
+
+TopLevelBuilder: androidx.navigation.AnimBuilder:
+    Builder should be defined as inner class: androidx.navigation.AnimBuilder
+TopLevelBuilder: androidx.navigation.NavActionBuilder:
+    Builder should be defined as inner class: androidx.navigation.NavActionBuilder
+TopLevelBuilder: androidx.navigation.NavArgumentBuilder:
+    Builder should be defined as inner class: androidx.navigation.NavArgumentBuilder
+TopLevelBuilder: androidx.navigation.NavDeepLinkDslBuilder:
+    Builder should be defined as inner class: androidx.navigation.NavDeepLinkDslBuilder
+TopLevelBuilder: androidx.navigation.NavDestinationBuilder:
+    Builder should be defined as inner class: androidx.navigation.NavDestinationBuilder
+TopLevelBuilder: androidx.navigation.NavOptionsBuilder:
+    Builder should be defined as inner class: androidx.navigation.NavOptionsBuilder
+TopLevelBuilder: androidx.navigation.PopUpToBuilder:
+    Builder should be defined as inner class: androidx.navigation.PopUpToBuilder

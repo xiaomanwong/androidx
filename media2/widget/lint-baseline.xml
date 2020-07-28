@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.1.0-alpha08" client="gradle" variant="debug" version="4.1.0-alpha08">
+
+    <issue
+        id="PrivateConstructorForUtilityClass"
+        message="Utility class with non private constructor"
+        errorLine1="    static class MediaFormatUtil {"
+        errorLine2="    ^">
+        <location
+            file="src/main/java/androidx/media2/widget/SubtitleController.java"
+            line="275"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public CharSequence getAccessibilityClassName() {"
+        errorLine2="           ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/media2/widget/MediaControlView.java"
+            line="430"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public boolean onTouchEvent(MotionEvent ev) {"
+        errorLine2="                                ~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/media2/widget/MediaControlView.java"
+            line="436"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public boolean onTrackballEvent(MotionEvent ev) {"
+        errorLine2="                                    ~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/media2/widget/MediaControlView.java"
+            line="453"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="UnknownNullness"
+        message="Unknown nullability; explicitly declare as `@Nullable` or `@NonNull` to improve Kotlin interoperability; see https://android.github.io/kotlin-guides/interop.html#nullability-annotations"
+        errorLine1="    public CharSequence getAccessibilityClassName() {"
+        errorLine2="           ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/androidx/media2/widget/VideoView.java"
+            line="572"
+            column="12"/>
+    </issue>
+
+</issues>

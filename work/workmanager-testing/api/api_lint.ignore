@@ -1,0 +1,37 @@
+// Baseline format: 1.0
+BuilderSetStyle: androidx.work.testing.TestListenableWorkerBuilder#from(android.content.Context, Class<W>):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.testing.TestListenableWorkerBuilder.from(android.content.Context,Class<W>)
+BuilderSetStyle: androidx.work.testing.TestListenableWorkerBuilder#from(android.content.Context, androidx.work.WorkRequest):
+    Builder methods names should use setFoo() / addFoo() / clearFoo() style: method androidx.work.testing.TestListenableWorkerBuilder.from(android.content.Context,androidx.work.WorkRequest)
+
+
+MissingNullability: androidx.work.testing.TestListenableWorkerBuilderKt#TestListenableWorkerBuilder(android.content.Context, androidx.work.Data, java.util.List<? extends java.lang.String>, int, java.util.List<? extends android.net.Uri>, java.util.List<? extends java.lang.String>):
+    Missing nullability on method `TestListenableWorkerBuilder` return
+MissingNullability: androidx.work.testing.TestWorkerBuilderKt#TestWorkerBuilder(android.content.Context, java.util.concurrent.Executor, androidx.work.Data, java.util.List<? extends java.lang.String>, int, java.util.List<? extends android.net.Uri>, java.util.List<? extends java.lang.String>):
+    Missing nullability on method `TestWorkerBuilder` return
+
+
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setForegroundUpdater(androidx.work.ForegroundUpdater):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setForegroundUpdater(androidx.work.ForegroundUpdater)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setId(java.util.UUID):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setId(java.util.UUID)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setInputData(androidx.work.Data):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setInputData(androidx.work.Data)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setNetwork(android.net.Network):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setNetwork(android.net.Network)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setProgressUpdater(androidx.work.ProgressUpdater):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setProgressUpdater(androidx.work.ProgressUpdater)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setRunAttemptCount(int):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setRunAttemptCount(int)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setTags(java.util.List<java.lang.String>):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setTags(java.util.List<java.lang.String>)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setTriggeredContentAuthorities(java.util.List<java.lang.String>):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setTriggeredContentAuthorities(java.util.List<java.lang.String>)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setTriggeredContentUris(java.util.List<android.net.Uri>):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setTriggeredContentUris(java.util.List<android.net.Uri>)
+SetterReturnsThis: androidx.work.testing.TestListenableWorkerBuilder#setWorkerFactory(androidx.work.WorkerFactory):
+    Methods must return the builder object (return type androidx.work.testing.TestListenableWorkerBuilder<W> instead of androidx.work.testing.TestListenableWorkerBuilder): method androidx.work.testing.TestListenableWorkerBuilder.setWorkerFactory(androidx.work.WorkerFactory)
+
+
+TopLevelBuilder: androidx.work.testing.TestListenableWorkerBuilder:
+    Builder should be defined as inner class: androidx.work.testing.TestListenableWorkerBuilder

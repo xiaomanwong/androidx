@@ -1,0 +1,470 @@
+pluginManagement {
+    repositories {
+        maven {
+            url = new File(buildscript.sourceFile.parent + "/../../prebuilts/androidx/external").getCanonicalFile()
+        }
+    }
+}
+
+rootProject.name = "androidx"
+
+/////////////////////////////
+//
+// Buildscript utils
+//
+/////////////////////////////
+
+
+// Calling includeProject(name, filePath) is shorthand for:
+//
+//   include(name)
+//   project(name).projectDir = new File(filePath)
+//
+// Note that <name> directly controls the Gradle project name, and also indirectly sets:
+//   the project name in the IDE
+//   the Maven artifactId
+//
+def includeProject(name, filePath) {
+    settings.include(name)
+
+    def file
+    if (filePath != null) {
+        if (filePath instanceof String) {
+            file = new File(rootDir, filePath)
+        } else {
+            file = filePath
+        }
+        project(name).projectDir = file
+    } else {
+        file = project(name).projectDir
+    }
+    if (!file.exists()) {
+        // This option is supported so that development/simplify_build_failure.sh can try
+        // deleting entire projects at once to identify the cause of a build failure
+        if (System.getenv("ALLOW_MISSING_PROJECTS") == null) {
+            throw new Exception("Path " + file + " does not exist; cannot include project " + name)
+        }
+    }
+}
+
+def includeProject(name) {
+    includeProject(name, null)
+}
+
+def getPlatform() {
+    def osName = System.getProperty("os.name").toLowerCase(Locale.US)
+    def isMacOsX = osName.contains("mac os x") ||
+            osName.contains("darwin") ||
+            osName.contains("osx")
+    return isMacOsX ? "darwin" : "linux"
+}
+
+// Certain projects cannot build on Darwin due to missing NDK
+def includeAppSearchNdkDeps = (getPlatform() != "darwin")
+def includeCameraNdkDeps = (getPlatform() != "darwin")
+
+/////////////////////////////
+//
+// Libraries
+//
+/////////////////////////////
+
+includeProject(":activity:activity", "activity/activity")
+includeProject(":activity:activity-ktx", "activity/activity-ktx")
+includeProject(":activity:activity-lint", "activity/activity-lint")
+includeProject(":activity:integration-tests:testapp", "activity/integration-tests/testapp")
+includeProject(":ads-identifier", "ads/ads-identifier")
+includeProject(":ads-identifier:integration-tests:testapp", "ads/ads-identifier/integration-tests/testapp")
+includeProject(":ads-identifier-benchmark", "ads/ads-identifier-benchmark")
+includeProject(":ads-identifier-common", "ads/ads-identifier-common")
+includeProject(":ads-identifier-provider", "ads/ads-identifier-provider")
+includeProject(":ads-identifier-provider:integration-tests:testapp", "ads/ads-identifier-provider/integration-tests/testapp")
+includeProject(":ads-identifier-testing", "ads/ads-identifier-testing")
+includeProject(":annotation:annotation", "annotation/annotation")
+includeProject(":annotation:annotation-sampled", "annotation/annotation-sampled")
+includeProject(":annotation:annotation-experimental", "annotation/annotation-experimental")
+includeProject(":annotation:annotation-experimental-lint", "annotation/annotation-experimental-lint")
+includeProject(":annotation:annotation-experimental-lint-integration-tests", "annotation/annotation-experimental-lint/integration-tests")
+includeProject(":appcompat:appcompat", "appcompat/appcompat")
+includeProject(":appcompat:appcompat-benchmark", "appcompat/appcompat-benchmark")
+includeProject(":appcompat:appcompat-lint", "appcompat/appcompat-lint")
+includeProject(":appcompat:appcompat-resources", "appcompat/appcompat-resources")
+
+if (includeAppSearchNdkDeps) {
+    includeProject(":appsearch:appsearch-annotation", "appsearch/annotation")
+    includeProject(":appsearch:appsearch", "appsearch/appsearch")
+}
+
+includeProject(":arch:core-common", "arch/core-common")
+includeProject(":arch:core-testing", "arch/core-testing")
+includeProject(":arch:core-runtime", "arch/core-runtime")
+includeProject(":asynclayoutinflater:asynclayoutinflater", "asynclayoutinflater/asynclayoutinflater")
+includeProject(":autofill:autofill", "autofill/autofill")
+includeProject(":benchmark:benchmark-common", "benchmark/common")
+includeProject(":benchmark:benchmark-junit4", "benchmark/junit4")
+includeProject(":benchmark:benchmark-benchmark", "benchmark/benchmark")
+includeProject(":benchmark:benchmark-gradle-plugin", "benchmark/gradle-plugin")
+includeProject(":benchmark:integration-tests:dry-run-benchmark", "benchmark/integration-tests/dry-run-benchmark")
+includeProject(":benchmark:integration-tests:startup-benchmark", "benchmark/integration-tests/startup-benchmark")
+includeProject(":biometric:biometric", "biometric/biometric")
+includeProject(":biometric:integration-tests:testapp", "biometric/integration-tests/testapp")
+includeProject(":browser:browser", "browser/browser")
+includeProject(":buildSrc-tests", "buildSrc-tests")
+// these projects intentionally fail to compile unless useMaxDepVersions is enabled
+if (startParameter.projectProperties.containsKey('useMaxDepVersions')) {
+    includeProject(":buildSrc-tests:max-dep-versions:buildSrc-tests-max-dep-versions-dep", "buildSrc-tests/max-dep-versions/buildSrc-tests-max-dep-versions-dep")
+    includeProject(":buildSrc-tests:max-dep-versions:buildSrc-tests-max-dep-versions-main", "buildSrc-tests/max-dep-versions/buildSrc-tests-max-dep-versions-main")
+}
+includeProject(":camera:camera-camera2", "camera/camera-camera2")
+includeProject(":camera:camera-camera2-pipe", "camera/camera-camera2-pipe")
+includeProject(":camera:camera-camera2-pipe-integration", "camera/camera-camera2-pipe-integration")
+includeProject(":camera:camera-core", "camera/camera-core")
+includeProject(":camera:camera-extensions", "camera/camera-extensions")
+includeProject(":camera:camera-extensions-stub", "camera/camera-extensions-stub")
+includeProject(":camera:camera-lifecycle", "camera/camera-lifecycle")
+includeProject(":camera:camera-testing", "camera/camera-testing")
+includeProject(":camera:camera-view", "camera/camera-view")
+includeProject(":camera:integration-tests:camera-testapp-camera2-pipe", "camera/integration-tests/camerapipetestapp")
+includeProject(":camera:integration-tests:camera-testapp-extensions", "camera/integration-tests/extensionstestapp")
+includeProject(":camera:integration-tests:camera-testapp-timing", "camera/integration-tests/timingtestapp")
+includeProject(":camera:integration-tests:camera-testapp-uiwidgets", "camera/integration-tests/uiwidgetstestapp")
+includeProject(":camera:integration-tests:camera-testapp-view", "camera/integration-tests/viewtestapp")
+includeProject(":camera:integration-tests:camera-testlib-extensions", "camera/integration-tests/extensionstestlib")
+
+if (includeCameraNdkDeps) {
+    includeProject(":camera:integration-tests:camera-testapp-core", "camera/integration-tests/coretestapp")
+}
+
+includeProject(":cardview:cardview", "cardview/cardview")
+includeProject(":collection:collection", "collection/collection")
+includeProject(":collection:collection-benchmark", "collection/collection-benchmark")
+includeProject(":collection:collection-ktx", "collection/collection-ktx")
+includeProject(":concurrent:concurrent-futures", "concurrent/futures")
+includeProject(":concurrent:concurrent-futures-ktx", "concurrent/futures-ktx")
+includeProject(":contentaccess:contentaccess-runtime", "contentaccess/contentaccess-runtime")
+includeProject(":contentaccess:contentaccess-annotations", "contentaccess/contentaccess-annotations")
+includeProject(":contentaccess:contentaccess-compiler", "contentaccess/contentaccess-compiler")
+includeProject(":contentaccess:integration-tests:testapp",
+        "contentaccess/integration-tests/testapp")
+includeProject(":contentpager:contentpager", "contentpager/contentpager")
+includeProject(":coordinatorlayout:coordinatorlayout", "coordinatorlayout/coordinatorlayout")
+includeProject(":core:core", "core/core")
+includeProject(":core:core-animation", "core/core-animation")
+includeProject(":core:core-animation-testing", "core/core-animation-testing")
+includeProject(":core:core-animation-integration-tests:testapp", "core/core-animation-integration-tests/testapp")
+includeProject(":core:core-ktx", "core/core-ktx")
+includeProject(":core-role", "core/core-role")
+includeProject(":cursoradapter:cursoradapter", "cursoradapter/cursoradapter")
+includeProject(":customview:customview", "customview/customview")
+includeProject(":datastore:datastore-core", "datastore/datastore-core")
+includeProject(":datastore:datastore-preferences", "datastore/datastore-preferences")
+includeProject(":datastore:datastore-proto", "datastore/datastore-proto")
+includeProject(":datastore:datastore-sampleapp", "datastore/datastore-sampleapp")
+includeProject(":documentfile:documentfile", "documentfile/documentfile")
+includeProject(":drawerlayout:drawerlayout", "drawerlayout/drawerlayout")
+includeProject(":dynamicanimation", "dynamic-animation")
+includeProject(":dynamicanimation:dynamicanimation", "dynamic-animation/dynamic-animation")
+includeProject(":dynamicanimation:dynamicanimation-ktx", "dynamic-animation/dynamic-animation-ktx")
+includeProject(":emoji", "emoji/core")
+includeProject(":emoji-bundled", "emoji/bundled")
+includeProject(":emoji-appcompat", "emoji/appcompat")
+includeProject(":enterprise-feedback", "enterprise/feedback")
+includeProject(":enterprise-feedback-testing", "enterprise/feedback/testing")
+includeProject(":exifinterface:exifinterface", "exifinterface/exifinterface")
+includeProject(":fragment:fragment", "fragment/fragment")
+includeProject(":fragment:integration-tests:testapp", "fragment/integration-tests/testapp")
+includeProject(":fragment:fragment-ktx", "fragment/fragment-ktx")
+includeProject(":fragment:fragment-lint", "fragment/fragment-lint")
+includeProject(":fragment:fragment-testing", "fragment/fragment-testing")
+includeProject(":fragment:fragment-testing-lint", "fragment/fragment-testing-lint")
+includeProject(":fragment:fragment-truth", "fragment/fragment-truth")
+includeProject(":fakeannotations", "fakeannotations")
+includeProject(":gridlayout:gridlayout", "gridlayout/gridlayout")
+includeProject(":heifwriter:heifwriter", "heifwriter/heifwriter")
+includeProject(":hilt:hilt-common", "hilt/hilt-common")
+includeProject(":hilt:hilt-compiler", "hilt/hilt-compiler")
+includeProject(":hilt:hilt-lifecycle-viewmodel", "hilt/hilt-lifecycle-viewmodel")
+includeProject(":hilt:hilt-work", "hilt/hilt-work")
+includeProject(":hilt:integration-tests:hilt-testapp-viewmodel", "hilt/integration-tests/viewmodelapp")
+includeProject(":hilt:integration-tests:hilt-testapp-worker", "hilt/integration-tests/workerapp")
+includeProject(":inspection:inspection", "inspection/inspection")
+includeProject(":inspection:inspection-gradle-plugin", "inspection/inspection-gradle-plugin")
+includeProject(":inspection:inspection-testing", "inspection/inspection-testing")
+includeProject(":interpolator:interpolator", "interpolator/interpolator")
+includeProject(":ipc:ipc-annotations", "ipc/ipc-annotations")
+includeProject(":ipc:ipc-compiler", "ipc/ipc-compiler")
+includeProject(":ipc:ipc-runtime", "ipc/ipc-runtime")
+includeProject(":jetifier-core", "jetifier/jetifier/core")
+includeProject(":jetifier-processor", "jetifier/jetifier/processor")
+includeProject(":jetifier-standalone", "jetifier/jetifier/standalone")
+includeProject(":jetifier-preprocessor", "jetifier/jetifier/preprocessor")
+includeProject(":lint-checks", "lint-checks")
+includeProject(":lint-checks:tests", "lint-checks/tests")
+includeProject(":leanback:leanback", "leanback/leanback")
+includeProject(":leanback:leanback-paging", "leanback/leanback-paging")
+includeProject(":leanback:leanback-preference", "leanback/leanback-preference")
+includeProject(":lifecycle:integration-tests:incrementality", "lifecycle/integration-tests/incrementality")
+includeProject(":lifecycle:integration-tests:lifecycle-testapp", "lifecycle/integration-tests/testapp")
+includeProject(":lifecycle:integration-tests:lifecycle-testapp-kotlin", "lifecycle/integration-tests/kotlintestapp")
+includeProject(":lifecycle:lifecycle-common", "lifecycle/lifecycle-common")
+includeProject(":lifecycle:lifecycle-common-java8", "lifecycle/lifecycle-common-java8")
+includeProject(":lifecycle:lifecycle-compiler", "lifecycle/lifecycle-compiler")
+includeProject(":lifecycle:lifecycle-extensions", "lifecycle/lifecycle-extensions")
+includeProject(":lifecycle:lifecycle-livedata-core", "lifecycle/lifecycle-livedata-core")
+includeProject(":lifecycle:lifecycle-livedata-core-ktx", "lifecycle/lifecycle-livedata-core-ktx")
+includeProject(":lifecycle:lifecycle-livedata-core-ktx-lint", "lifecycle/lifecycle-livedata-core-ktx-lint")
+includeProject(":lifecycle:lifecycle-livedata-core-truth", "lifecycle/lifecycle-livedata-core-truth")
+includeProject(":lifecycle:lifecycle-livedata", "lifecycle/lifecycle-livedata")
+includeProject(":lifecycle:lifecycle-livedata-ktx", "lifecycle/lifecycle-livedata-ktx")
+includeProject(":lifecycle:lifecycle-process", "lifecycle/lifecycle-process")
+includeProject(":lifecycle:lifecycle-reactivestreams", "lifecycle/lifecycle-reactivestreams")
+includeProject(":lifecycle:lifecycle-reactivestreams-ktx", "lifecycle/lifecycle-reactivestreams-ktx")
+includeProject(":lifecycle:lifecycle-runtime", "lifecycle/lifecycle-runtime")
+includeProject(":lifecycle:lifecycle-runtime-ktx", "lifecycle/lifecycle-runtime-ktx")
+includeProject(":lifecycle:lifecycle-runtime-ktx-lint", "lifecycle/lifecycle-runtime-ktx-lint")
+includeProject(":lifecycle:lifecycle-runtime-testing", "lifecycle/lifecycle-runtime-testing")
+includeProject(":lifecycle:lifecycle-service", "lifecycle/lifecycle-service")
+includeProject(":lifecycle:lifecycle-viewmodel", "lifecycle/lifecycle-viewmodel")
+includeProject(":lifecycle:lifecycle-viewmodel-ktx", "lifecycle/lifecycle-viewmodel-ktx")
+includeProject(":lifecycle:lifecycle-viewmodel-savedstate","lifecycle/lifecycle-viewmodel-savedstate")
+includeProject(":lint-demos:lint-demo-appcompat", "lint-demos/lint-demo-appcompat")
+includeProject(":loader:loader", "loader/loader")
+includeProject(":loader:loader-ktx", "loader/loader-ktx")
+includeProject(":localbroadcastmanager:localbroadcastmanager", "localbroadcastmanager/localbroadcastmanager")
+includeProject(":media:media", "media/media")
+includeProject(":media2:media2-common", "media2/common")
+includeProject(":media2:media2-player", "media2/player")
+includeProject(":media2:media2-session", "media2/session")
+includeProject(":media2:media2-widget", "media2/widget")
+includeProject(":media2:media2-exoplayer", "media2/media2-exoplayer")
+includeProject(":media2:integration-tests:testapp", "media2/integration-tests/testapp")
+includeProject(":mediarouter:mediarouter", "mediarouter/mediarouter")
+includeProject(":navigation:navigation-benchmark", "navigation/benchmark")
+includeProject(":navigation:navigation-common", "navigation/navigation-common")
+includeProject(":navigation:navigation-common-ktx", "navigation/navigation-common-ktx")
+includeProject(":navigation:navigation-dynamic-features-runtime", "navigation/navigation-dynamic-features-runtime")
+includeProject(":navigation:navigation-dynamic-features-fragment", "navigation/navigation-dynamic-features-fragment")
+includeProject(":navigation:navigation-runtime", "navigation/navigation-runtime")
+includeProject(":navigation:navigation-runtime-ktx", "navigation/navigation-runtime-ktx")
+includeProject(":navigation:navigation-runtime-truth", "navigation/navigation-runtime-truth")
+includeProject(":navigation:navigation-testing", "navigation/navigation-testing")
+includeProject(":navigation:navigation-fragment", "navigation/navigation-fragment")
+includeProject(":navigation:navigation-fragment-ktx", "navigation/navigation-fragment-ktx")
+includeProject(":navigation:navigation-ui", "navigation/navigation-ui")
+includeProject(":navigation:navigation-ui-ktx", "navigation/navigation-ui-ktx")
+includeProject(":navigation:navigation-integration-tests", "navigation/integration-tests")
+includeProject(":navigation:navigation-integration-tests:testapp", "navigation/integration-tests/testapp")
+includeProject(":navigation:navigation-safe-args-generator", "navigation/navigation-safe-args-generator")
+includeProject(":navigation:navigation-safe-args-gradle-plugin", "navigation/navigation-safe-args-gradle-plugin")
+includeProject(":paging:integration-tests:testapp", "paging/integration-tests/testapp")
+includeProject(":paging:paging-common", "paging/common")
+includeProject(":paging:paging-common-ktx", "paging/common/ktx")
+includeProject(":paging:paging-runtime", "paging/runtime")
+includeProject(":paging:paging-runtime-ktx", "paging/runtime/ktx")
+includeProject(":paging:paging-rxjava2", "paging/rxjava2")
+includeProject(":paging:paging-rxjava2-ktx", "paging/rxjava2/ktx")
+includeProject(":paging:paging-rxjava3", "paging/rxjava3")
+includeProject(":paging:paging-guava", "paging/guava")
+includeProject(":paging:samples", "paging/samples")
+includeProject(":palette:palette", "palette/palette")
+includeProject(":palette:palette-ktx", "palette/palette-ktx")
+includeProject(":percentlayout:percentlayout", "percentlayout/percentlayout")
+includeProject(":preference:preference", "preference/preference")
+includeProject(":preference:preference-ktx", "preference/preference-ktx")
+includeProject(":print:print", "print/print")
+includeProject(":recommendation:recommendation", "recommendation/recommendation")
+includeProject(":recyclerview:recyclerview", "recyclerview/recyclerview")
+includeProject(":recyclerview:recyclerview-benchmark", "recyclerview/recyclerview-benchmark")
+includeProject(":recyclerview:recyclerview-lint", "recyclerview/recyclerview-lint")
+includeProject(":recyclerview:recyclerview-selection", "recyclerview/recyclerview-selection")
+includeProject(":room:integration-tests:room-incremental-annotation-processing", "room/integration-tests/incremental-annotation-processing")
+includeProject(":room:integration-tests:room-testapp-noappcompat", "room/integration-tests/noappcompattestapp")
+includeProject(":room:integration-tests:room-testapp-autovalue", "room/integration-tests/autovaluetestapp")
+includeProject(":room:integration-tests:room-testapp", "room/integration-tests/testapp")
+includeProject(":room:integration-tests:room-testapp-kotlin", "room/integration-tests/kotlintestapp")
+includeProject(":room:room-benchmark", "room/benchmark")
+includeProject(":room:room-common", "room/common")
+includeProject(":room:room-compiler", "room/compiler")
+includeProject(":room:room-compiler-xprocessing", "room/compiler-xprocessing")
+includeProject(":room:room-guava", "room/guava")
+includeProject(":room:room-ktx", "room/ktx")
+includeProject(":room:room-migration", "room/migration")
+includeProject(":room:room-runtime", "room/runtime")
+includeProject(":room:room-rxjava2", "room/rxjava2")
+includeProject(":room:room-rxjava3", "room/rxjava3")
+includeProject(":room:room-testing", "room/testing")
+includeProject(":remotecallback:remotecallback-processor", "remotecallback/processor")
+includeProject(":remotecallback:remotecallback", "remotecallback/remotecallback")
+includeProject(":versionedparcelable:versionedparcelable-compiler", "versionedparcelable/versionedparcelable-compiler")
+includeProject(":versionedparcelable:versionedparcelable", "versionedparcelable/versionedparcelable")
+includeProject(":savedstate:savedstate", "savedstate/savedstate")
+includeProject(":savedstate:savedstate-ktx", "savedstate/savedstate-ktx")
+includeProject(":security:security-biometric", "security/security-biometric")
+includeProject(":security:security-crypto", "security/crypto")
+includeProject(":security:security-crypto-ktx", "security/security-crypto-ktx")
+includeProject(":security:security-identity-credential", "security/identity-credential")
+includeProject(":serialization:serialization", "serialization/serialization")
+includeProject(":serialization:serialization-annotation", "serialization/serialization-annotation")
+includeProject(":serialization:serialization-compiler", "serialization/serialization-compiler")
+includeProject(":serialization:serialization-runtime", "serialization/serialization-runtime")
+includeProject(":serialization:serialization-runtime-parcel", "serialization/serialization-runtime-parcel")
+includeProject(":serialization:serialization-runtime-proto", "serialization/serialization-runtime-proto")
+includeProject(":sharetarget:sharetarget", "sharetarget/sharetarget")
+includeProject(":sharetarget:integration-tests:testapp", "sharetarget/integration-tests/testapp")
+includeProject(":slice-core", "slices/core")
+includeProject(":slice-view", "slices/view")
+includeProject(":slice-builders", "slices/builders")
+includeProject(":slice-test", "slices/test")
+includeProject(":slice-builders-ktx", "slices/builders/ktx")
+includeProject(":slice-benchmark", "slices/benchmark")
+includeProject(":slice-remotecallback", "slices/remotecallback")
+includeProject(":slidingpanelayout:slidingpanelayout", "slidingpanelayout/slidingpanelayout")
+includeProject(":startup:startup-runtime", "startup/startup-runtime")
+includeProject(":startup:startup-runtime-lint", "startup/startup-runtime-lint")
+includeProject(":startup:integration-tests:first-library", "startup/integration-tests/first-library")
+includeProject(":startup:integration-tests:second-library", "startup/integration-tests/second-library")
+includeProject(":startup:integration-tests:test-app", "startup/integration-tests/test-app")
+includeProject(":sqlite:sqlite", "sqlite/sqlite")
+includeProject(":sqlite:sqlite-ktx", "sqlite/sqlite-ktx")
+includeProject(":sqlite:sqlite-framework", "sqlite/sqlite-framework")
+includeProject(":sqlite:sqlite-inspection", "sqlite/sqlite-inspection")
+includeProject(":sqlite:integration-tests:inspection-room-testapp", "sqlite/integration-tests/inspection-room-testapp")
+includeProject(":sqlite:integration-tests:inspection-sqldelight-testapp", "sqlite/integration-tests/inspection-sqldelight-testapp")
+includeProject(":swiperefreshlayout:swiperefreshlayout", "swiperefreshlayout/swiperefreshlayout")
+includeProject(":test-screenshot", "test/screenshot")
+includeProject(":test-screenshot-proto", "test/screenshot/proto")
+includeProject(":textclassifier:textclassifier", "textclassifier/textclassifier")
+includeProject(":textclassifier:integration-tests:testapp", "textclassifier/integration-tests/testapp")
+includeProject(":tracing:tracing", "tracing/tracing")
+includeProject(":tracing:tracing-ktx", "tracing/tracing-ktx")
+includeProject(":transition:transition", "transition/transition")
+includeProject(":transition:transition-ktx", "transition/transition-ktx")
+includeProject(":tvprovider", "tv-provider")
+includeProject(":tvprovider:tvprovider", "tv-provider/tv-provider")
+includeProject(":vectordrawable:vectordrawable", "vectordrawable/vectordrawable")
+includeProject(":vectordrawable:vectordrawable-animated", "vectordrawable/vectordrawable-animated")
+includeProject(":vectordrawable:vectordrawable-seekable", "vectordrawable/vectordrawable-seekable")
+includeProject(":vectordrawable:integration-tests:testapp", "vectordrawable/integration-tests/testapp")
+includeProject(":viewpager:viewpager", "viewpager/viewpager")
+includeProject(":viewpager2:viewpager2", "viewpager2/viewpager2")
+includeProject(":viewpager2:integration-tests:testapp", "viewpager2/integration-tests/testapp")
+includeProject(":wear:wear", "wear/wear")
+includeProject(":wear:wear-input", "wear/wear-input")
+includeProject(":wear:wear-input-testing", "wear/wear-input-testing")
+includeProject(":webkit:webkit", "webkit/webkit")
+includeProject(":webkit:integration-tests:testapp", "webkit/integration-tests/testapp")
+includeProject(":window:window", "window/window")
+includeProject(":window:window-extensions", "window/window-extensions")
+includeProject(":window:window-sidecar", "window/window-sidecar")
+includeProject(":window:window-samples", "window/window-samples")
+includeProject(":work:work-runtime", "work/workmanager")
+includeProject(":work:work-gcm", "work/workmanager-gcm")
+includeProject(":work:work-runtime-ktx", "work/workmanager-ktx")
+includeProject(":work:work-rxjava2", "work/workmanager-rxjava2")
+includeProject(":work:work-rxjava3", "work/workmanager-rxjava3")
+includeProject(":work:work-testing", "work/workmanager-testing")
+includeProject(":work:work-runtime-lint", "work/workmanager-lint")
+includeProject(":work:work-benchmark", "work/workmanager-benchmark")
+includeProject(":work:work-inspection", "work/workmanager-inspection")
+includeProject(":work:integration-tests:testapp", "work/integration-tests/testapp")
+
+/////////////////////////////
+//
+// Legacy
+//
+/////////////////////////////
+
+includeProject(":legacy-support-core-utils", "legacy/core-utils")
+
+/////////////////////////////
+//
+// Samples
+//
+/////////////////////////////
+
+File samplesRoot = new File(rootDir, "samples")
+
+// Note: don't add new samples/ apps. Instead, Create
+// <module>/integration-tests/testapp in the "Libraries" section above.
+includeProject(":support-animation-demos", new File(samplesRoot, "SupportAnimationDemos"))
+includeProject(":support-content-demos", new File(samplesRoot, "SupportContentDemos"))
+includeProject(":support-emoji-demos", new File(samplesRoot, "SupportEmojiDemos"))
+includeProject(":support-leanback-demos", new File(samplesRoot, "SupportLeanbackDemos"))
+includeProject(":support-preference-demos", new File(samplesRoot, "SupportPreferenceDemos"))
+includeProject(":support-remotecallback-demos", new File(samplesRoot, "SupportRemoteCallbackDemos"))
+includeProject(":support-slices-demos", new File(samplesRoot, "SupportSliceDemos"))
+includeProject(":support-transition-demos", new File(samplesRoot, "SupportTransitionDemos"))
+includeProject(":support-v4-demos", new File(samplesRoot, "Support4Demos"))
+includeProject(":support-v7-demos", new File(samplesRoot, "Support7Demos"))
+includeProject(":support-wear-demos", new File(samplesRoot, "SupportWearDemos"))
+
+/////////////////////////////
+//
+// Testing libraries
+//
+/////////////////////////////
+
+includeProject(":internal-testutils-common", "testutils/testutils-common")
+includeProject(":internal-testutils-runtime", "testutils/testutils-runtime")
+includeProject(":internal-testutils-appcompat", "testutils/testutils-appcompat")
+includeProject(":internal-testutils-espresso", "testutils/testutils-espresso")
+includeProject(":internal-testutils-truth", "testutils/testutils-truth")
+includeProject(":internal-testutils-ktx", "testutils/testutils-ktx")
+includeProject(":internal-testutils-navigation", "testutils/testutils-navigation")
+includeProject(":internal-testutils-paging", "testutils/testutils-paging")
+includeProject(":internal-testutils-gradle-plugin", "testutils/testutils-gradle-plugin")
+
+/////////////////////////////
+//
+// Applications and libraries for tests
+//
+/////////////////////////////
+
+includeProject(":support-media-test-client", "media/version-compat-tests/current/client")
+includeProject(":support-media-test-client-previous", "media/version-compat-tests/previous/client")
+includeProject(":support-media-test-service", "media/version-compat-tests/current/service")
+includeProject(":support-media-test-service-previous", "media/version-compat-tests/previous/service")
+includeProject(":support-media-test-lib", "media/version-compat-tests/lib")
+
+includeProject(":support-media2-test-client", "media2/session/version-compat-tests/current/client")
+includeProject(":support-media2-test-client-previous", "media2/session/version-compat-tests/previous/client")
+includeProject(":support-media2-test-service", "media2/session/version-compat-tests/current/service")
+includeProject(":support-media2-test-service-previous", "media2/session/version-compat-tests/previous/service")
+includeProject(":support-media2-test-common", "media2/session/version-compat-tests/common")
+
+/////////////////////////////
+//
+// External
+//
+/////////////////////////////
+
+apply(from: "include-composite-deps.gradle")
+File externalRoot = new File(rootDir, "../../external")
+
+if (includeAppSearchNdkDeps) {
+    includeProject(":icing", new File(externalRoot, "icing"))
+    includeProject(":icing:nativeLib", new File(externalRoot, "icing/nativeLib"))
+}
+
+includeProject(":noto-emoji-compat", new File(externalRoot, "noto-fonts/emoji-compat"))
+
+// fake project which is used for docs generation from prebuilts
+// we need real android project to generate R.java, aidl etc files that mentioned in sources
+if (!startParameter.projectProperties.containsKey('android.injected.invoked.from.ide')) {
+    // we don't need it in ide, so we don't configure it there
+    includeProject(":docs-fake", "docs-fake")
+    includeProject(":docs-runner", "docs-runner")
+}
+
+// dumb test project that has a test for each size to ensure that at least one test is run
+// for each size and test runner is happy when there is nothing to test.
+includeProject(":dumb-tests", "dumb-tests")
+
+
+/////////////////////////////
+//
+// Remote build cache set up
+//
+/////////////////////////////
+
+apply from: new File('buildSrc/remoteBuildCache.gradle')
